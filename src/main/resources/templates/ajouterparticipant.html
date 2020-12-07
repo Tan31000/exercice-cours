@@ -1,0 +1,80 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template}">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Votre Formation</title>
+</head>
+
+<body>
+	<div layout:fragment="contents">
+		<div class="row mt-2 ml-1 mr-1">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<div class="card  border-info">
+					<div class="card-header badge badge-info text-wrap">
+						<h6>Ajouter un participant</h6>
+					</div>
+					<div class="card-body ">
+						<form th:object="${formParticipant}" th:action="@{/admin/ajouterparticipant}" method="post">
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"> Nom:</label>
+								<div class="col-sm-10">
+									<input type="text" th:field="*{nom}" class="form-control" placeholder="nom" />
+									<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"> Prénom:</label>
+								<div class="col-sm-10">
+									<input type="text" th:field="*{prenom}" class="form-control" placeholder="prénom" />
+									<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></div>
+								</div>
+							</div>	
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"> Age:</label>
+								<div class="col-sm-10">
+									<input type="text" th:field="*{age}" class="form-control" placeholder="age" />
+									<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"> Formation:</label>
+								<div class="col-sm-10">
+									<select  name="formation" class="form-control" multiple>
+										<option th:each="F:${listeFormation}" th:text="${F.code} +'-'+ ${F.theme}" th:value="${{F}}">
+										</option>
+									</select>
+									<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('formation')}" th:errors="*{formation}"></div>	
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<button class="btn btn-primary" type="submit">Ajouter</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
